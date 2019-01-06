@@ -1,0 +1,63 @@
+/*1. Find the second highest*/
+select 
+*
+from [Name Data Combined]
+
+where salary = 
+              (
+                  select max(salary) from 
+                  [Name Data Combined]
+                  where salary <>
+                                   (
+                                  SELECT max(Salary)
+                                  from
+                                  [Name Data Combined]
+                                   )
+               )
+
+;
+
+
+/*2. how much is the average weight for red abd blue grouand select the group which has average salary equal to 80000 ?*/
+select 
+avg(weight) as AvgWeight, avg(salary) as AvgSalary, color
+
+from [Name Data Combined]
+
+group by color
+having avg(salary)>80000
+;
+
+
+/*3. select the person with maximum weight in group 'Blue' ( using group by) */
+
+/*this one cannot not show the colour*/
+select 
+max(weight)
+from [Name Data Combined]
+where color='blue'
+;
+
+/*show colour but must use group by*/
+select 
+max(weight), color
+from [Name Data Combined]
+where color='blue'
+group by color
+;
+
+/*same as above, but slightly inefficient*/
+select 
+max(weight), color
+from [Name Data Combined]
+group by color
+having color='blue'
+;
+
+
+/*4. select all people which has letter 'a' in the name */
+select 
+*
+from [Name Data Combined]
+where name Like "*a*"
+;
