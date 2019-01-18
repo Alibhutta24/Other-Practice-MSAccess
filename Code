@@ -14,11 +14,10 @@ where salary =
                                   [Name Data Combined]
                                    )
                )
-
 ;
 
 
-/*2. how much is the average weight for red abd blue grouand select the group which has average salary equal to 80000 ?*/
+/*2. how much is the average weight for red andd blue group and select the group which has average salary equal to 80000 ?*/
 select 
 avg(weight) as AvgWeight, avg(salary) as AvgSalary, color
 
@@ -61,3 +60,47 @@ select
 from [Name Data Combined]
 where name Like "*a*"
 ;
+
+/*Another set of practice*/
+
+/*1. Select the name,capital, population (in billions with '$' in starting and 'bn' at end) and continent*/
+SELECT 
+a.Name, b.Capital, "$" & " " & [c.Population]/1000000000 & 'bn' AS BN, c.[Growth rate], c.Continent
+FROM 
+([Table 1] AS a LEFT JOIN [Table 2] AS b ON a.ID1=b.ID2) 
+LEFT JOIN [Table 3] AS c ON a.ID1=c.ID3
+;
+
+
+/*2. find the max in each continent */
+SELECT 
+Continent, max(BN)
+FROM Answer1Join
+GROUP BY Continent
+;
+
+
+/*3. What will be each country's population in 2019 ?*/
+SELECT 
+Population * (1+[Growth rate]) AS 2019Pop, 
+*
+FROM AllFieldsJoin;
+
+
+/* 4. Find the list of countries which do not have the capitals listed
+SELECT 
+*
+FROM AllFieldsJoin
+WHERE Capital is NULL;
+
+
+/*5Count how many times each country is listed
+select the countries which are above the average population of all the countries
+select the distinct rows and distinct ids from table 5
+Create two column, Name and Managed By.
+Union table 1 and 4 and see the difference
+Create a new column 'CalField' where is country is from Asia, then population *1.5, any other continent population devided by 1.5
+
+
+
+
