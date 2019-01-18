@@ -61,7 +61,7 @@ from [Name Data Combined]
 where name Like "*a*"
 ;
 
-/*Another set of practice*/
+/* ANOTHER SET OF PRACTICE */
 
 /*1. Select the name,capital, population (in billions with '$' in starting and 'bn' at end) and continent*/
 SELECT 
