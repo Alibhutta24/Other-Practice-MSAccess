@@ -87,19 +87,74 @@ Population * (1+[Growth rate]) AS 2019Pop,
 FROM AllFieldsJoin;
 
 
-/* 4. Find the list of countries which do not have the capitals listed
+/*4. Find the list of countries which do not have the capitals listed
 SELECT 
 *
 FROM AllFieldsJoin
 WHERE Capital is NULL;
 
 
-/*5Count how many times each country is listed
-select the countries which are above the average population of all the countries
-select the distinct rows and distinct ids from table 5
-Create two column, Name and Managed By.
-Union table 1 and 4 and see the difference
-Create a new column 'CalField' where is country is from Asia, then population *1.5, any other continent population devided by 1.5
+/*5. Count how many times each country is listed*/
+SELECT 
+Name, Count(Name) AS [Count]
+FROM [Table 4]
+GROUP BY Name;
+
+
+/*6. select the countries which are above the average population of all the countries*/
+SELECT 
+*
+FROM AllFieldsJoin
+WHERE Population > (
+                      Select 
+                      Avg(Population) As Average
+                      From AllFieldsJoin
+                      ;
+                    )
+;
+
+
+/*7. select the distinct rows and distinct ids from table 5 */
+SELECT 
+DISTINCT ID2, Capital
+FROM [Table 5]
+GROUP BY ID2, Capital;
+
+
+/*8. Create two column, Name and Managed By. */
+SELECT 
+a.Name AS Name, b.Name AS [Manage by]
+FROM [Table 6] AS a LEFT JOIN [Table 6] AS b ON a.ManagerID=b.Employeeid;
+
+
+/*9. Union table 1 and 4 and see the difference */
+/*UNION, removed duplicates*/
+SELECT
+*
+From 
+[Table 1] UNION 
+SELECT 
+* 
+FROM
+[Table 4];
+
+/*UNION ALL, kept duplicates*/
+SELECT
+*
+From 
+[Table 1] UNION ALL 
+SELECT 
+* 
+FROM
+[Table 4];
+
+
+/*10. Create a new column 'CalField' where is country is from Asia, then population *1.5, 
+any other continent population devided by 1.5 */
+SELECT 
+IIF(Continent = 'Asia', Population*1.5, Population/1.5) AS CalField, 
+*
+FROM [Table 3];
 
 
 
