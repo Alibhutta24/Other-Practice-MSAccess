@@ -159,3 +159,36 @@ FROM [Table 3];
 
 
 
+/* 11. Create a new column with number of days between Date and date2*/
+SELECT 
+Date2-Date AS Day_diff, 
+*
+FROM [Table 7];
+
+/* 12. Extract month, Day and year from Date column*/
+SELECT 
+year(Date) AS YearBorn, 
+month(Date) AS MonthBorn, 
+day(Date) AS DayBorn, 
+*
+FROM [Table 7];
+
+/* 13. Create a new column called 'Name' which should be like G. Singh. Use column 'First Name' and 'Last Name', and also Fullname*/
+SELECT 
+(MID([First Name], 1,1) & '.' & [Last Name]) AS Name, 
+*
+FROM [Table 7];
+
+
+/* 14. Create a new column PeriodDate where 19890514 becomes 05-14-1989.*/
+SELECT 
+MID(Periodid,5,2) & '-' & MID(Periodid,7,2) & '-' & MID(Periodid,1,4) AS PeriodDate, 
+*
+FROM [Table 7];
+
+SELECT 
+FORMAT(PeriodDate, "long date") AS FormatedDate, 
+*
+FROM Answer14;
+
+
