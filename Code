@@ -79,6 +79,25 @@ FROM Answer1Join
 GROUP BY Continent
 ;
 
+/*2b. find the 2nd max population of all */
+SELECT 
+*
+FROM  Answer1Join
+WHERE BN = 
+(
+
+SELECT max(BN) as 2Max
+FROM Answer1Join
+WHERE BN <>
+
+    (SELECT
+      max(BN)
+      from Answer1Join
+     );
+
+)
+;
+
 
 /*3. What will be each country's population in 2019 ?*/
 SELECT 
@@ -157,13 +176,12 @@ IIF(Continent = 'Asia', Population*1.5, Population/1.5) AS CalField,
 FROM [Table 3];
 
 
-
-
 /* 11. Create a new column with number of days between Date and date2*/
 SELECT 
 Date2-Date AS Day_diff, 
 *
 FROM [Table 7];
+
 
 /* 12. Extract month, Day and year from Date column*/
 SELECT 
@@ -172,6 +190,7 @@ month(Date) AS MonthBorn,
 day(Date) AS DayBorn, 
 *
 FROM [Table 7];
+
 
 /* 13. Create a new column called 'Name' which should be like G. Singh. Use column 'First Name' and 'Last Name', and also Fullname*/
 SELECT 
