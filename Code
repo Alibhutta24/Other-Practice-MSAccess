@@ -210,4 +210,8 @@ FORMAT(PeriodDate, "long date") AS FormatedDate,
 *
 FROM Answer14;
 
-
+/* 15. Select First Name*/
+SELECT 
+Instr([Full Name], ' ') AS SpacePosition, Left([Full Name], SpacePosition-1), 
+*
+FROM [Table 7];
